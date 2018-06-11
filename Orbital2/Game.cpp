@@ -2,9 +2,11 @@
 
 #include <iostream>
 
+#include "Display.h"
+
 Game::Game()
 {
-
+	
 }
 
 Game::~Game()
@@ -24,5 +26,5 @@ void Game::update()
 
 void Game::draw()
 {
-
+	Display::draw(c1);
 }
