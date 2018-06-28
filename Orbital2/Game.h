@@ -2,6 +2,7 @@
 
 //#include <SFML/Graphics.hpp>
 
+#include "Body.h"
 #include "Circle.h"
 
 class Game
@@ -15,6 +16,5 @@ public:
 	void draw();
 
 private:
-	Circle c1 = Circle(1, 0.5, 10);
-
+	std::vector<Body*> bodies;
 };

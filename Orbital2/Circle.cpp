@@ -1,6 +1,6 @@
 #include "Circle.h"
 
-
+Circle::Circle() : Body(0, 0) { }
 
 Circle::Circle(float mass, float restitution, float radius) : Body(mass, restitution)
 {
