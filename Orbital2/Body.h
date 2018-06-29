@@ -3,11 +3,6 @@
 //#include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics.hpp>
 
-enum Shape
-{
-	CIRCLE
-};
-
 class Body : public sf::Drawable
 {
 public:
@@ -26,4 +21,10 @@ public:
 protected:
 	Body(const Shape shape, float mass, float restitution);
 
+};
+
+enum Shape
+{
+	CIRCLE,
+	RECTANGLE
 };

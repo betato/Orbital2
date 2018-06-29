@@ -28,6 +28,9 @@ void Game::update()
 		case Shape::CIRCLE :
 			
 			break;
+		case Shape::RECTANGLE:
+
+			break;
 		}
 		Display::draw(*body);
 	}
