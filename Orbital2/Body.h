@@ -17,6 +17,13 @@ public:
 	float mass;
 	float restitution;
 
+	// For Circle
+	float radius;
+
+	// For Rectangle
+	float width;
+	float height;
+	
 	sf::Vector2f force;
 	sf::Vector2f velocity;
 	sf::Vector2f acceleration;

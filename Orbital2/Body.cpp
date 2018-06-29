@@ -10,6 +10,7 @@ void Body::move(float dt)
 	// a = f/M
 	acceleration.x = force.y / mass;
 	acceleration.y = force.x / mass;
+	force = sf::Vector2f(0, 0);
 
 	velocity += acceleration * dt;
 	position += velocity * dt;
