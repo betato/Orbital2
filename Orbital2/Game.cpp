@@ -6,7 +6,7 @@
 #include "Display.h"
 #include "Rectangle.h"
 
-#define TIMESTEP 0.025
+#define TIMESTEP 0.025f
 
 Game::Game()
 {
@@ -14,10 +14,10 @@ Game::Game()
 	bodies.push_back(new Circle(1, 0.5, 12));
 	bodies.push_back(new Rectangle(1, 0.5, sf::Vector2f(12, 22)));
 
-	bodies[0]->addForce(sf::Vector2f(-200, 200));
-	bodies[1]->position = sf::Vector2f(20, -40);
-	bodies[1]->addForce(sf::Vector2f(100, 100));
-	bodies[2]->position = sf::Vector2f(100, -100);
+	bodies[0]->addForce(sf::Vector2f(200, 200));
+	bodies[1]->position = sf::Vector2f(20, 40);
+	bodies[1]->addForce(sf::Vector2f(-100, 100));
+	bodies[2]->position = sf::Vector2f(100, 100);
 }
 
 Game::~Game()

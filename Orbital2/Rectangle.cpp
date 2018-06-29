@@ -10,7 +10,7 @@ Rectangle::Rectangle() : Rectangle(0, 0, sf::Vector2f(0, 0)) { }
 void Rectangle::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	sf::RectangleShape drawRect(size);
-	states.transform.translate(sf::Vector2f(position.x - size.x * 0.5, -position.y - size.y * 0.5));
+	states.transform.translate(sf::Vector2f(position.x - size.x * 0.5, position.y - size.y * 0.5));
 	// Draw vertex array
 	target.draw(drawRect, states);
 }

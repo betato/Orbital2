@@ -10,7 +10,7 @@ Circle::Circle() : Circle(0, 0, 0) { }
 void Circle::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	sf::CircleShape drawCircle(radius);
-	states.transform.translate(sf::Vector2f(position.x - radius, -position.y - radius));
+	states.transform.translate(sf::Vector2f(position.x - radius, position.y - radius));
 	// Draw vertex array
 	target.draw(drawCircle, states);
 }
