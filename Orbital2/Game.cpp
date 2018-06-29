@@ -4,6 +4,8 @@
 
 #include "Display.h"
 
+#define TIMESTEP 1
+
 Game::Game()
 {
 	bodies.push_back(new Circle(1, 0.5, 10));
@@ -23,6 +25,7 @@ void Game::update()
 {
 	for (Body* body : bodies)
 	{
+		// Collide
 		switch (body->shape)
 		{
 		case Shape::CIRCLE :
@@ -33,6 +36,9 @@ void Game::update()
 			break;
 		}
 		Display::draw(*body);
+
+		// Move
+		body->move(TIMESTEP);
 	}
 }
 
