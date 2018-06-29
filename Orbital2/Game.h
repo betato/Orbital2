@@ -3,7 +3,6 @@
 //#include <SFML/Graphics.hpp>
 
 #include "Body.h"
-#include "Circle.h"
 
 class Game
 {

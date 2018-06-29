@@ -21,8 +21,7 @@ public:
 	float radius;
 
 	// For Rectangle
-	float width;
-	float height;
+	sf::Vector2f size;
 	
 	sf::Vector2f force;
 	sf::Vector2f velocity;
