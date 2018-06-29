@@ -21,10 +21,22 @@ void Game::input(const sf::Event & events)
 
 void Game::update()
 {
-
+	for (Body* body : bodies)
+	{
+		switch (body->shape)
+		{
+		case Shape::CIRCLE :
+			
+			break;
+		}
+		Display::draw(*body);
+	}
 }
 
 void Game::draw()
 {
-	Display::draw(*bodies[0]);
+	for (Body* body : bodies)
+	{
+		Display::draw(*body);
+	}
 }
