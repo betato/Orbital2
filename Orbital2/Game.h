@@ -14,8 +14,6 @@ public:
 	void update();
 	void draw();
 
-	bool bodiesColliding(Body* b1, Body* b2);
-
 private:
 	std::vector<Body*> bodies;
 };
