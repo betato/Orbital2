@@ -11,19 +11,36 @@
 
 Game::Game()
 {
-	bodies.push_back(new Circle(1, 0.5, 8));
-	bodies.push_back(new Circle(1, 0.5, 12));
+	//bodies.push_back(new Circle(1, 0.5, 8));
+	//bodies.push_back(new Circle(1, 0.5, 12));
 
-	//bodies.push_back(new Rectangle(1, 0.5, sf::Vector2f(12, 22)));
-	//bodies.push_back(new Rectangle(1, 0.5, sf::Vector2f(12, 22)));
+	for (int i = 0; i < 60; i++)
+	{
+		float size = (rand() % 100) / 10 + 2;
+		bodies.push_back(new Circle(3.14 * size * size, 1, size));
+		bodies[i]->velocity = sf::Vector2f((rand() % 100) - 50, (rand() % 100) - 50);
+		bodies[i]->position = sf::Vector2f(rand() % 600, rand() % 600);
+	}
 
-	bodies[0]->addForce(sf::Vector2f(600, 600));
-	bodies[1]->position = sf::Vector2f(20, 40);
-	bodies[1]->addForce(sf::Vector2f(-100, 100));
+	for (int i = 60; i < 120; i++)
+	{
+		float width = (rand() % 200) / 10 + 8;
+		float height = (rand() % 200) / 10 + 8;
+		bodies.push_back(new Rectangle(width * height, 1, sf::Vector2f(width, height)));
+		bodies[i]->velocity = sf::Vector2f((rand() % 100) - 50, (rand() % 100) - 50);
+		bodies[i]->position = sf::Vector2f(rand() % 600, rand() % 600);
+	}
 
-	//bodies[2]->position = sf::Vector2f(100, 100);
-	//bodies[3]->position = sf::Vector2f(90, 110);
-	//bodies[3]->addForce(sf::Vector2f(-100, 100));
+	//bodies.push_back(new Rectangle(1, 1, sf::Vector2f(20, 7)));
+	//bodies.push_back(new Rectangle(3, 1, sf::Vector2f(15, 34)));
+
+	//bodies[0]->addForce(sf::Vector2f(600, 600));
+	//bodies[1]->position = sf::Vector2f(20, 40);
+	//bodies[1]->addForce(sf::Vector2f(-100, 100));
+
+	//bodies[0]->position = sf::Vector2f(100, 100);
+	//bodies[1]->position = sf::Vector2f(100, 160);
+	//bodies[0]->velocity = sf::Vector2f(0, 40);
 }
 
 Game::~Game()
@@ -45,7 +62,7 @@ void Game::update()
 		{
 			if (bodiesColliding(bodies[i], bodies[j]))
 			{
-				std::cout << "collision between bodies " << i << " and " << j << std::endl;
+				//std::cout << "collision between bodies " << i << " and " << j << std::endl;
 			}
 		}
 	}
