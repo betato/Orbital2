@@ -67,6 +67,7 @@ void Game::draw()
 
 bool Game::bodiesColliding(Body* b1, Body* b2)
 {
+	sf::Vector2f normal;
 	if (b1->shape == Shape::CIRCLE && b2->shape == Shape::CIRCLE)
 	{
 		// Circle-Circle Collision
@@ -78,7 +79,7 @@ bool Game::bodiesColliding(Body* b1, Body* b2)
 		if (c * c > separationSquared)
 		{
 			float distance = std::sqrt(separationSquared);
-			sf::Vector2f normal;
+			
 			if (distance != 0)
 			{
 				// Get unit normal
@@ -89,37 +90,76 @@ bool Game::bodiesColliding(Body* b1, Body* b2)
 				// Body centers overlapped, choose random unit normal
 				normal = sf::Vector2f(1, 0);
 			}
-
-			sf::Vector2f relativeVelocity = b2->velocity - b1->velocity;
-			float collisionVelocity = relativeVelocity.x * normal.x + relativeVelocity.y * normal.y;
-			float restitution = std::min(b1->restitution, b2->restitution);
-
-			if (collisionVelocity < 0)
-			{
-				// Bodies already moving apart
-				return true;
-			}
-
-			// Apply change in velocity
-			sf::Vector2f vm = -(collisionVelocity * (restitution + 1) / (b1->mass + b2->mass)) * normal;
-			b1->velocity -= vm * b2->mass;
-			b2->velocity += vm * b1->mass;
-
-			return true;
 		}
-		return false;
+		else
+		{
+			return false;
+		}
 	}
 	else if (b1->shape == Shape::RECTANGLE && b2->shape == Shape::RECTANGLE)
 	{
 		// Rectangle-Rectangle Collision
-		return b1->position.x < b2->position.x + b2->size.x &&
-			b1->position.x + b1->size.x > b2->position.x &&
-			b1->position.y < b2->position.y + b2->size.y &&
-			b1->size.x + b1->position.y > b2->position.y;
+		float xOverlap = (b1->size.x + b2->size.x) / 2 - std::abs(b1->position.x - b2->position.x);
+		if (xOverlap > 0)
+		{
+			float yOverlap = (b1->size.y + b2->size.y) / 2 - std::abs(b1->position.y - b2->position.y);
+			if (yOverlap > 0)
+			{
+				if (yOverlap > xOverlap)
+				{
+					// Colliding in x axis
+					if (b1->position.x > b2->position.x)
+					{
+						normal = sf::Vector2f(1, 0);
+					}
+					else
+					{
+						normal = sf::Vector2f(-1, 0);
+					}
+				}
+				else
+				{
+					// Colliding in y axis
+					if (b1->position.y > b2->position.y)
+					{
+						normal = sf::Vector2f(0, 1);
+					}
+					else
+					{
+						normal = sf::Vector2f(0, -1);
+					}
+				}
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
 	}
 	else
 	{
 		// Circle-Rectangle or Rectangle-Circle Collision
 		return false;
 	}
+
+	sf::Vector2f relativeVelocity = b2->velocity - b1->velocity;
+	float collisionVelocity = relativeVelocity.x * normal.x + relativeVelocity.y * normal.y;
+	float restitution = std::min(b1->restitution, b2->restitution);
+
+	if (collisionVelocity < 0)
+	{
+		// Bodies already moving apart
+		return true;
+	}
+
+	// Apply change in velocity
+	sf::Vector2f vm = -(collisionVelocity * (restitution + 1) / (b1->mass + b2->mass)) * normal;
+	b1->velocity -= vm * b2->mass;
+	b2->velocity += vm * b1->mass;
+
+	return true;
 }
