@@ -34,7 +34,7 @@ void Application::runLoop()
 			updateCount = 0;
 
 			std::cout << " FPS: " << fps;
-			std::cout << " UPS: " << ups;
+			std::cout << " UPS: " << ups << std::endl;
 
 			counterClock.restart();
 		}

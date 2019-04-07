@@ -8,8 +8,8 @@ void Body::addForce(sf::Vector2f appliedForce)
 void Body::move(float dt)
 {
 	// a = f/M
-	acceleration.x = force.y / mass;
-	acceleration.y = force.x / mass;
+	acceleration.x = force.x / mass;
+	acceleration.y = force.y / mass;
 	force = sf::Vector2f(0, 0);
 
 	velocity += acceleration * dt;
